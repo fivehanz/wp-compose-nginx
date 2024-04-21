@@ -1,7 +1,9 @@
 FROM wordpress:php8.3-fpm
 
 # add redis
-RUN pecl install redis
+RUN MAKEFLAGS=" -j 4" pecl install redis igbinary \
+  && docker-php-ext-enable redis \
+  && docker-php-ext-enable igbinary
 
 # add memory limits
 RUN printf '%s\n' 'memory_limit = 512M' \
