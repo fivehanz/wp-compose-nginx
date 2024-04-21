@@ -11,6 +11,7 @@ RUN printf '%s\n' 'memory_limit = 2G' \
   'post_max_size = 256M' \
   'max_execution_time = 36000' \
   'max_input_time = 36000' \
+  'default_socket_timeout = 3000' \
   > /usr/local/etc/php/conf.d/uploads.ini
 
 EXPOSE 9000
