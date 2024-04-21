@@ -1,0 +1,41 @@
+
+services:
+  wordpress:
+    build:
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: user
+      WORDPRESS_DB_PASSWORD: password
+      WORDPRESS_DB_NAME: wp-db
+    volumes:
+      - /opt/apps/persistence/711666:/var/www/html
+    ports:
+      - 59000:9000
+
+  db:
+    image: mariadb
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: wp-db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      MYSQL_RANDOM_ROOT_PASSWORD: '1'
+    networks:
+      - wp-nw
+      - db
+    volumes:
+      - /opt/databases/prod/711666:/var/lib/mysql
+
+  keydb:
+    container_name: wp-redis
+    image: eqalpha/keydb:latest
+    restart: unless-stopped
+    networks:
+      - wp-nw
+
+networks:
+  wp-nw:
+    driver: bridge
+  db:
