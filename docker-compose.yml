@@ -13,6 +13,9 @@ services:
       - /opt/apps/persistence/711666:/var/www/html
     ports:
       - 59000:9000
+    networks:
+      - wp-nw
+     # - db
 
   db:
     image: mariadb
