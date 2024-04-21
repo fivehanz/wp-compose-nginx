@@ -6,7 +6,7 @@ RUN MAKEFLAGS=" -j 4" pecl install redis igbinary \
   && docker-php-ext-enable igbinary
 
 # add memory limits
-RUN printf '%s\n' 'memory_limit = 512M' \
+RUN printf '%s\n' 'memory_limit = 2G' \
   'upload_max_filesize = 256M' \
   'post_max_size = 256M' \
   'max_execution_time = 36000' \
