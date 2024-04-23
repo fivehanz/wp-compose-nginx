@@ -9,8 +9,6 @@ services:
       WORDPRESS_DB_USER: user
       WORDPRESS_DB_PASSWORD: password
       WORDPRESS_DB_NAME: wp-db
-      # WP_REDIS_HOST: keydb
-      # WP_REDIS_PORT: 6379
     volumes:
       - /opt/apps/persistence/711666:/var/www/html
     ports:
@@ -31,13 +29,6 @@ services:
       - db
     volumes:
       - /opt/databases/prod/711666:/var/lib/mysql
-
-  # keydb:
-  #   container_name: wp-redis
-  #   image: eqalpha/keydb:latest
-  #   restart: unless-stopped
-  #   networks:
-  #     - wp-nw
 
 networks:
   wp-nw:
